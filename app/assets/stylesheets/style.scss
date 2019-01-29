@@ -42,7 +42,7 @@ li {
     padding: 8px 5px;
 }
 
-.field {
+.field,.top-space,.actions  {
     margin-top: 1em;
 }
 
@@ -56,11 +56,11 @@ li {
     font-size: 1.2em;
 }
 
-.top-space {
-    margin-top: 1em;
-}
-
 .red {
     color: #E74C3C !important;
+}
+
+.text-left {
+    text-align: left;
 }
 
