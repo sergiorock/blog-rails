@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   # index es el action
 
   get "/welcome", to: "home#index"
+
+  get "articles/new", to: "articles#new"
+  post "articles", to: "articles#create"
 end
