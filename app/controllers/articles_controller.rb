@@ -5,6 +5,10 @@ class ArticlesController < ApplicationController
 
   before_action :set_article, except: [:index, :new, :create]
 
+  def index
+    @articles = Article.all
+  end
+
   def show
   end
 
