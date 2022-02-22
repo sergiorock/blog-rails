@@ -1,17 +1,18 @@
 class ArticlesController < ApplicationController
 
+  # before_action es un método que se ejecuta antes de que se ejecute cualquier acción
+  # after_action es un método que se ejecuta después de que se ejecute cualquier acción (es menos común su uso)
+
+  before_action :set_article, except: [:index, :new, :create]
+
   def show
-    @article = Article.find(params[:id])
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   # Recibe el formulario desde el método edit
   def update
-    @article = Article.find(params[:id])
-
     # Si no le paso alguno de los parametros, no se actualiza
     # A diferencia del método create (método de clase), update es un método de instancia
     @article.update(title: params[:article][:title], content: params[:article][:content])
@@ -31,8 +32,14 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
     redirect_to root_path
   end
+
+  def set_article
+    puts("Estoy en el método set_article")
+    # Como la variabale tiene el @ se puede usar en cualquier parte del controlador
+    @article = Article.find(params[:id])
+  end
+
 end
