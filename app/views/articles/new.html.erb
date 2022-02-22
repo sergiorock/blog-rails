@@ -1,20 +1,4 @@
-<%# Si no agrego la opción local: true. El formulario tratará de enviarse via AJAX %>
-<%= form_with(model: @article, local: true) do |form| %>
+<%# Render es el método que se usa para mostrar un parcial.
+El nombre del archivo se escribe sin el guion bajo %>
 
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :content %>
-    <%= form.rich_text_area :content %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-
-<% end %>
-
-<%# Esto va a enviar el formulario al método create %>
+<%= render "articles/form" %>
