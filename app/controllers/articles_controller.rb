@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   # before_action es un método que se ejecuta antes de que se ejecute cualquier acción
   # after_action es un método que se ejecuta después de que se ejecute cualquier acción (es menos común su uso)
 
-  before_action :set_article, except: [:index, :new, :create]
+  before_action :set_article, except: [:index, :new, :create, :from_author]
 
   def index
     @articles = Article.all
@@ -31,14 +31,19 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.create(title: params[:article][:title], content: params[:article][:content])
-    render json: @article
+    @article = current_user.articles.create(title: params[:article][:title], content: params[:article][:content])
+    redirect_to @article
   end
 
   def destroy
     @article.destroy
     redirect_to root_path
   end
+
+  def from_author
+    @user = User.find(params[:user_id])
+  end
+
 
   def set_article
     puts("Estoy en el método set_article")
