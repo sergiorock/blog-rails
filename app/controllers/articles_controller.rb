@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
   def update
     # Si no le paso alguno de los parametros, no se actualiza
     # A diferencia del método create (método de clase), update es un método de instancia
-    @article.update(title: params[:article][:title], content: params[:article][:content])
+    @article.update(article_params)
     
     redirect_to  @article
   end
@@ -31,7 +31,8 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = current_user.articles.create(title: params[:article][:title], content: params[:article][:content])
+    # Por parametros se puede pasar un hash con todos los datos del formulario
+    @article = current_user.articles.create(article_params)
     redirect_to @article
   end
 
@@ -49,6 +50,13 @@ class ArticlesController < ApplicationController
     puts("Estoy en el método set_article")
     # Como la variabale tiene el @ se puede usar en cualquier parte del controlador
     @article = Article.find(params[:id])
+  end
+
+  def article_params
+    # Require article, dice que obligatoriamente necesitamos un parametro article
+    # Y sobre este parametro que nos devuelve un Hash, vamos a decirle cuales atributos estan permitidos y cuales no.
+    # Esto lo hacemos con la palabra reservada permit
+    params.require(:article).permit(:title, :content)
   end
 
 end
