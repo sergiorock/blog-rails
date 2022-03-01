@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get "user/:user_id", to: "articles#from_author", on: :collection
   end
 
+  resources :categories
+
   # get "articles/user/:user_id", to: "articles#from_author"
 
   # get "articles", to: "articles#index"

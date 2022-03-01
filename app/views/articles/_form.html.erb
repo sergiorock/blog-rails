@@ -10,6 +10,21 @@
     </div>
 
     <div class="field">
+      <%= form.label :category_elements %>
+      <div class="row">
+        <% @categories.each do |category| %>
+            <label class="form-check-label col-6 col-sm-4">
+
+            <%= category.title %>
+            <%= form.check_box :category_elements, {multiple: true, class: "form-check-input"}, category.id, nil %>
+            </label>
+
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="field">
       <%= form.label :content %>
       <%= form.rich_text_area :content %>
     </div>

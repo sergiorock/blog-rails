@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    @categories = Category.all
   end
 
   # Recibe el formulario desde el método edit
@@ -20,6 +21,11 @@ class ArticlesController < ApplicationController
     # Si no le paso alguno de los parametros, no se actualiza
     # A diferencia del método create (método de clase), update es un método de instancia
     @article.update(article_params)
+
+    puts("Estoy en el método update")
+    puts(@article.category_elements)
+
+    @article.save_categories
     
     redirect_to  @article
   end
@@ -28,11 +34,13 @@ class ArticlesController < ApplicationController
     # En el caso particular de rails una variable de instancia (@) se puede llamar desde la vista que esta llamando a esta acción
     # Mientras que si declaramos la variable sin el @ se puede usar solo en el método
     @article = Article.new
+    @categories = Category.all
   end
 
   def create
     # Por parametros se puede pasar un hash con todos los datos del formulario
     @article = current_user.articles.create(article_params)
+
     redirect_to @article
   end
 
@@ -56,7 +64,7 @@ class ArticlesController < ApplicationController
     # Require article, dice que obligatoriamente necesitamos un parametro article
     # Y sobre este parametro que nos devuelve un Hash, vamos a decirle cuales atributos estan permitidos y cuales no.
     # Esto lo hacemos con la palabra reservada permit
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, category_elements: [])
   end
 
 end
