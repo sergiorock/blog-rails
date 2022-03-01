@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -17,6 +18,9 @@ Rails.application.routes.draw do
   end
 
   resources :categories
+
+  resources :users, only: [:update]
+  get "profile", to: "users#edit"
 
   # get "articles/user/:user_id", to: "articles#from_author"
 

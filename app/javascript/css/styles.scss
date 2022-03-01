@@ -35,7 +35,8 @@
   input[type='email'],
   input[type='number'],
   input[type='password'],
-  input[type="text-area"]{
+  input[type="text-area"],
+  input[type="file"]{
       @extend .form-control;
       @extend .bg-light;
   }
